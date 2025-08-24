@@ -1,0 +1,17 @@
+create procedure stp_CustomerUpdate
+	@customerID int,
+    @FirstName NVARCHAR(MAX) = NULL,
+    @LastName NVARCHAR(MAX) = NULL,
+    @DateOfBirth DATE = NULL,
+    @Picture VARBINARY(MAX) = NULL
+as
+begin
+    update Customers
+    set 
+        FirstName = ISNULL(@FirstName, FirstName),
+        LastName = ISNULL(@LastName, LastName),
+        DateOfBirth = ISNULL(@DateOfBirth, DateOfBirth),
+        Picture = ISNULL(@Picture, Picture)
+    where 
+        id = @CustomerId;
+end;

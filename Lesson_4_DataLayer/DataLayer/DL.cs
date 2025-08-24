@@ -99,6 +99,53 @@ namespace Lesson_4_DataLayer.DataLayer
                     return list;
                 }
             }
+
+            public static int Delete(int customerID)
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+
+                    string custDelete = "dbo.stp_CustomerDelete";
+                    SqlCommand cmd = new SqlCommand()
+                    {
+                        CommandText = custDelete,
+                        Connection = conn,
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    cmd.Parameters.AddWithValue("@customerID", customerID);
+                    int res = cmd.ExecuteNonQuery();
+
+                    Console.WriteLine($"Обновлено строк: {res}");
+
+                    return res;
+                }
+            }
+
+            public static int Update(int id, string firstName = null, string lastName = null, DateTime? dateOfBirth = null, byte[] pictureBytes = null)
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open ();
+
+                    string custUodate = "dbo.stp_CustomerUpdate";
+                    SqlCommand cmd = new SqlCommand(custUodate, conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@customerID", id);
+                    cmd.Parameters.AddWithValue("@FirstName", firstName);
+                    cmd.Parameters.AddWithValue("@LastName", lastName);
+                    cmd.Parameters.AddWithValue("@DateOfBirth", dateOfBirth);
+                    cmd.Parameters.AddWithValue("@Picture", pictureBytes);
+
+                    int res = cmd.ExecuteNonQuery();
+
+                    Console.WriteLine($"Обновлено строк: {res}");
+
+                    return res;
+                }
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Lesson_4_DataLayer.Models
 
         public override string ToString()
         {
-            return $"{ID, -4} {FirstName, -10} {LastName, -20} {DateOfBirth.ToShortDateString(), -10}";
+            return $"{ID, -4} {FirstName, -10} {LastName, -10} {DateOfBirth.ToShortDateString(), -10}";
         }
     }
 }
