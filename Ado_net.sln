@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_4_DataLayer", "Lesso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_5_Adapter", "Lesson_5_Adapter\Lesson_5_Adapter.csproj", "{F1AF8146-1840-433D-9225-3506B3CD8E84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_5_1_Graphics", "Lesson_5_1_Graphics\Lesson_5_1_Graphics.csproj", "{42B09256-4F55-455D-A1A5-B76BF39AB438}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson_5_1_Graphic", "Lesson_5_1_Graphic\Lesson_5_1_Graphic.csproj", "{8B3BF692-D3CC-4CE8-AE7B-EE50A9A28A1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{F1AF8146-1840-433D-9225-3506B3CD8E84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1AF8146-1840-433D-9225-3506B3CD8E84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1AF8146-1840-433D-9225-3506B3CD8E84}.Release|Any CPU.Build.0 = Release|Any CPU
-		{42B09256-4F55-455D-A1A5-B76BF39AB438}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42B09256-4F55-455D-A1A5-B76BF39AB438}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42B09256-4F55-455D-A1A5-B76BF39AB438}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42B09256-4F55-455D-A1A5-B76BF39AB438}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B3BF692-D3CC-4CE8-AE7B-EE50A9A28A1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B3BF692-D3CC-4CE8-AE7B-EE50A9A28A1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B3BF692-D3CC-4CE8-AE7B-EE50A9A28A1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B3BF692-D3CC-4CE8-AE7B-EE50A9A28A1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
