@@ -1,0 +1,77 @@
+-- процедура для использования в блоке catch
+CREATE PROCEDURE usp_GetErrorInfo
+AS
+SELECT
+    ERROR_NUMBER() AS ErrorNumber,
+    ERROR_SEVERITY() AS ErrorSeverity,
+    ERROR_STATE() AS ErrorState,
+    ERROR_PROCEDURE() AS ErrorProcedure,
+    ERROR_LINE() AS ErrorLine,
+    ERROR_MESSAGE() AS ErrorMessage;
+
+-----------------------------------------------------------------------------------------------------------------
+
+-- добавление продукта
+create or alter procedure Add_product
+	@title nvarchar(200),
+	@description nvarchar(1000),
+	@price decimal(10, 2)
+as
+begin
+	begin try
+		begin transaction
+			INSERT INTO products (title, description, price, added_date)
+			VALUES
+				(@title, @description, @price, getdate());
+		commit transaction
+	end try
+
+	begin catch
+		rollback transaction
+		exec usp_GetErrorInfo
+	end catch
+end
+
+-----------------------------------------------------------------------------------------------------------------
+
+-- Получение продукта по категории
+create or alter procedure Get_product_by_category
+	@category_id int
+as
+begin
+	begin try
+		select p.title from products as p
+		join products_categories as pc on pc.product_id = p.product_id
+		and pc.category_id = @category_id
+	end try
+
+	begin catch
+		exec usp_GetErrorInfo
+	end catch
+end
+
+-----------------------------------------------------------------------------------------------------------------
+
+-- Получение списка всех товаров (Порционно)
+create or alter procedure Get_products_paginated
+	@page_number int = 1,
+	@page_size int = 5
+as
+begin
+	begin try
+		select
+			p.title,
+			p.description,
+			(select sum(pw.quantity)
+			from products_warehouses as pw
+			where pw.product_id = p.product_id) as total_quantity
+		from products as p
+		order by p.product_id
+		offset (@page_number - 1) * @page_size rows
+		fetch next @page_size rows only;
+	end try
+
+	begin catch
+		exec usp_GetErrorInfo
+	end catch
+end
