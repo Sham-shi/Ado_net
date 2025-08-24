@@ -57,94 +57,143 @@ namespace Lesson_2_Stored_procedure
             //}
 
 
-            //ДЗ - хххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххх
+            ////ДЗ - хххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххххх
 
-            string constr = ConfigurationManager.ConnectionStrings["OnlineShop_db"].ConnectionString;
+            //string constr = ConfigurationManager.ConnectionStrings["OnlineShop_db"].ConnectionString;
+            //using (SqlConnection conn = new SqlConnection(constr))
+            //{
+            //    conn.Open();
+
+            //    SqlDataReader reader;
+
+            //    //[dbo].[Add_product] - добавление продукта
+            //    string addProduct = "[dbo].[Add_product]";
+            //    SqlCommand cmd = new SqlCommand()
+            //    {
+            //        CommandText = addProduct,
+            //        Connection = conn,
+            //        CommandType = CommandType.StoredProcedure
+            //    };
+
+            //    cmd.Parameters.AddWithValue("@title", "Беговая дорожка ProForm");
+            //    cmd.Parameters.AddWithValue("@description", "Электрическая беговая дорожка с 12 программами тренировок, максимальная скорость 16 км/ч");
+            //    cmd.Parameters.AddWithValue("@price", 45990.00);
+
+            //    int res = cmd.ExecuteNonQuery();
+
+            //    Console.WriteLine($"Обновлено строк: {res}");
+            //    Console.WriteLine("\n-----------------------------------------------------------------\n");
+
+
+            //    //[dbo].[Get_product_by_category] - Получение продукта по категории
+            //    string getProductByCategory = "[dbo].[Get_product_by_category]";
+            //    SqlCommand cmd2 = new SqlCommand(getProductByCategory, conn);
+
+            //    int category_id = 2;
+
+            //    cmd2.CommandType = CommandType.StoredProcedure;
+            //    cmd2.Parameters.AddWithValue("@category_id", category_id);
+
+            //    reader = cmd2.ExecuteReader();
+
+            //    while (reader.Read())
+            //    {
+            //        Console.WriteLine($"{reader[0]}");
+            //    }
+
+            //    reader.Close();
+
+            //    Console.WriteLine("\n-----------------------------------------------------------------\n");
+
+            //    //[dbo].[Get_products_paginated] - Получение списка всех товаров (Порционно)
+            //    string getProductsPaginated = "[dbo].[Get_products_paginated]";
+
+            //    int pageNumber = 1;
+            //    const int PageSize = 5;
+
+            //    SqlCommand cmd3 = new SqlCommand(getProductsPaginated, conn);
+
+            //    cmd3.CommandType = CommandType.StoredProcedure;
+            //    SqlParameter parameterPageNumber = new SqlParameter()
+            //    {
+            //        ParameterName = "@page_number",
+            //        SqlDbType = SqlDbType.Int,
+            //        Value = pageNumber
+            //    };
+
+            //    cmd3.Parameters.Add(parameterPageNumber);
+            //    cmd3.Parameters.AddWithValue("@page_size", PageSize);
+
+            //    reader = cmd3.ExecuteReader();
+
+            //    while(reader.HasRows)
+            //    {
+            //        while (reader.Read())
+            //        {
+            //            Console.WriteLine($"Название - {reader[0]}");
+            //            Console.WriteLine($"Описание - {reader[1]}");
+            //            Console.WriteLine($"Общая стоимость - {reader[2]}");
+            //        }
+            //        reader.Close();
+
+            //        Console.WriteLine($"\tPage {pageNumber}\n");
+
+            //        pageNumber++;
+            //        cmd3.Parameters[0].Value = pageNumber;
+
+            //        reader = cmd3.ExecuteReader();
+            //    }
+
+            //    reader.Close();
+            //}
+
+
+
+            string constr = ConfigurationManager.ConnectionStrings["Company_db"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(constr))
             {
                 conn.Open();
 
-                SqlDataReader reader;
+                //продолжение лекции
+                //3 [dbo].[stp_EmployeeByID]
+                //string command = "[dbo].[stp_EmployeeByID]";
+                //SqlCommand cmd = new SqlCommand(command, conn);
+                //cmd.CommandType = CommandType.StoredProcedure;
 
-                //[dbo].[Add_product] - добавление продукта
-                string addProduct = "[dbo].[Add_product]";
-                SqlCommand cmd = new SqlCommand()
+                ////способ передачи параметра 1
+                ////SqlParameter employee_id = cmd.Parameters.Add("@employeeID", SqlDbType.Int);
+                ////employee_id.Value = 4;
+
+                ////способ передачи параметра 2
+                //cmd.Parameters.AddWithValue("@employeeID", 3);
+
+                //SqlDataReader dr = cmd.ExecuteReader();
+
+                //while (dr.Read())
+                //{
+                //    var f0 = dr[0];
+                //    var f2 = dr[2];
+                //    var f5 = dr[5];
+
+                //    Console.WriteLine($"{f0, -4}{f2, -15}{f5, -10}");
+                //}
+
+                //4 [dbo].[stp_CustomerDelete]
+                string command = "[dbo].[stp_CustomerDelete]";
+                SqlCommand cmd = new SqlCommand(command, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@customerID", 4);
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
                 {
-                    CommandText = addProduct,
-                    Connection = conn,
-                    CommandType = CommandType.StoredProcedure
-                };
-
-                cmd.Parameters.AddWithValue("@title", "Беговая дорожка ProForm");
-                cmd.Parameters.AddWithValue("@description", "Электрическая беговая дорожка с 12 программами тренировок, максимальная скорость 16 км/ч");
-                cmd.Parameters.AddWithValue("@price", 45990.00);
-
-                int res = cmd.ExecuteNonQuery();
-
-                Console.WriteLine($"Обновлено строк: {res}");
-                Console.WriteLine("\n-----------------------------------------------------------------\n");
-
-
-                //[dbo].[Get_product_by_category] - Получение продукта по категории
-                string getProductByCategory = "[dbo].[Get_product_by_category]";
-                SqlCommand cmd2 = new SqlCommand(getProductByCategory, conn);
-
-                int category_id = 2;
-
-                cmd2.CommandType = CommandType.StoredProcedure;
-                cmd2.Parameters.AddWithValue("@category_id", category_id);
-
-                reader = cmd2.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Console.WriteLine($"{reader[0]}");
+                    Console.WriteLine("Объект удалён");
                 }
-
-                reader.Close();
-
-                Console.WriteLine("\n-----------------------------------------------------------------\n");
-
-                //[dbo].[Get_products_paginated] - Получение списка всех товаров (Порционно)
-                string getProductsPaginated = "[dbo].[Get_products_paginated]";
-
-                int pageNumber = 1;
-                const int PageSize = 5;
-
-                SqlCommand cmd3 = new SqlCommand(getProductsPaginated, conn);
-
-                cmd3.CommandType = CommandType.StoredProcedure;
-                SqlParameter parameterPageNumber = new SqlParameter()
+                else
                 {
-                    ParameterName = "@page_number",
-                    SqlDbType = SqlDbType.Int,
-                    Value = pageNumber
-                };
-
-                cmd3.Parameters.Add(parameterPageNumber);
-                cmd3.Parameters.AddWithValue("@page_size", PageSize);
-
-                reader = cmd3.ExecuteReader();
-
-                while(reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        Console.WriteLine($"Название - {reader[0]}");
-                        Console.WriteLine($"Описание - {reader[1]}");
-                        Console.WriteLine($"Общая стоимость - {reader[2]}");
-                    }
-                    reader.Close();
-
-                    Console.WriteLine($"\tPage {pageNumber}\n");
-
-                    pageNumber++;
-                    cmd3.Parameters[0].Value = pageNumber;
-
-                    reader = cmd3.ExecuteReader();
+                    Console.WriteLine("Ошибка удаления");
                 }
-
-                reader.Close();
             }
         }
     }
